@@ -1,0 +1,10 @@
+<header class="container py-5">
+  <h1 class="text-center font-weight-bold">Pseudo Wordle</h1>
+  <hr>
+  <div class="navbar navbar-light bg-light">
+    <button class="navbar-toggler" type="button" (click)="goHome()">Home</button>
+    <button class="navbar-toggler" type="button" (click)="goDictionary()">Dictionary</button>
+  </div>
+  <router-outlet></router-outlet>
+  <div class="alert alert-danger" role="alert" id="error" *ngIf="error.length !=0"> {{this.error}} </div>
+</header>

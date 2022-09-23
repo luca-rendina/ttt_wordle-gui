@@ -1,0 +1,37 @@
+<article class="container py-5">
+    <div id="game">
+      <div *ngIf="verdict == -1" class="alert alert-warning" role="alert">
+        Word Reseted!
+      </div>
+      <div *ngIf="verdict == 1" class="alert alert-success" role="alert">
+        You WON! New word available!
+      </div>
+      <!-- Building the grid when the words are present -->
+      <div class="row" *ngFor="let g of guesses!">
+        <div class="cell {{getCellClass(g, i)}}" *ngFor="let c of g.Word.split(''); index as i">
+          {{c}}
+        </div>
+      </div>
+      <!-- Default: Building the grid when the words are not present -->
+      <div class="row" *ngFor="let row of [].constructor(getNRowsMatrix()); index as i">
+        <div class="cell" *ngFor="let column of [].constructor(getNColumnsMatrix()); index as j"></div>
+      </div>
+    </div>
+    <hr>
+    <div>
+        <input 
+          type="text" 
+          maxlength={{this.length_word}} 
+          class="form-control form-control-lg" 
+          id="iguess" 
+          placeholder="Try to guess" 
+          [(ngModel)]="currentGuess"
+          (input)="alphaNumberOnly($event)" 
+          (keypress)="clsAlphaOnly($event)" 
+          (paste)="onPaste($event)">
+        <div>
+          <button type="button" class="btn btn-primary m-1" (click)="guess()">guess word</button>
+          <button type="button" class="btn btn-danger m-1" (click)="reset()">reset word</button>
+        </div>
+      </div>
+  </article>
